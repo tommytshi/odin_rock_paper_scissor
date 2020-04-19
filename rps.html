@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<title>
+Rock Paper Scissors
+</title>
+
+<div>
+
+<body>
+
+<h1>
+Hello
+</h1>
+
+<h2>
+Please click below to play Rock, paper, scissors
+</h2>
+
+<input type="button" onclick= "game()">
+
+<script type="text/javascript">
+
+{
+	let ch_array = ["Rock", "Paper", "Scissors"];
+	let playerSelection;
+	let computerSelection;
+	const response_lose = "You lose!";
+	const response_win = "You win!";
+	const computer_hand = "Computer returns ";
+	let result;
+
+	let playerScore = 0;
+	let opponentScore = 0;
+
+	function playerInput() {
+	    let a = prompt("Select Rock, Paper, or Scissors");
+	    let b = a.toLowerCase();
+	    playerSelection = b.charAt(0).toUpperCase() + b.slice(1);
+	    console.log("You chose " + playerSelection);
+	}
+
+	function computerInput() {   
+	    computerSelection = ch_array[Math.floor(Math.random() * ch_array.length)];
+	    
+	}
+
+	function calc_winner(playerSelection, computerSelection) {
+	    if (playerSelection == computerSelection) {
+	        console.log(computer_hand + computerSelection + ". " + "Draw");
+	    }
+	    else if (playerSelection == "Rock" && computerSelection == "Paper") {
+	        console.log(computer_hand + computerSelection + ". " + response_lose);
+	        opponentScore += 1;
+	    }
+	    else if (playerSelection == "Paper" && computerSelection == "Scissors") {
+	        console.log(computer_hand + computerSelection + ". " + response_lose);
+	        opponentScore += 1;
+	    }
+	    else if (playerSelection == "Scissors" && computerSelection == "Rock") {
+	        console.log(computer_hand + computerSelection + ". " + response_lose);
+	        opponentScore += 1;
+	    } 
+	    else {
+	        console.log(computer_hand + computerSelection + ". " + response_win);
+	        playerScore += 1;
+	    }
+	}
+
+
+	function playRound() {
+	    playerInput();
+	    computerInput();
+	    calc_winner(playerSelection, computerSelection);
+	    console.log("Player scored:" + playerScore);
+	    console.log("Opponent scored:" + opponentScore);
+	}
+
+
+	function game() {
+            
+        let round_input = prompt("How many rounds to play?");
+
+        while (isNaN(round_input)) {
+            round_input = prompt("Please input a number for how many rounds to play");
+        }
+
+        for (i=0; i < round_input; i++) {
+        	playRound();
+        }
+
+        switch (true) {
+            case playerScore > opponentScore:
+            result= response_win;
+            break;
+
+            case playerScore < opponentScore:
+            result= response_lose;
+            break;
+
+            case playerScore == opponentScore:
+            result= "Tie game";
+            break;
+        }
+
+        return result;
+        console.log(result);
+	}
+}
+
+</script>
+
+</body>
+</div>
+</html>
